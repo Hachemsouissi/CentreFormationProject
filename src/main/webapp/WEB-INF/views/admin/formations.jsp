@@ -45,7 +45,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 30px auto;
             padding: 0 20px;
         }
@@ -78,12 +78,13 @@
             background: white;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            overflow: hidden;
+            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 900px;
         }
 
         thead {
@@ -144,6 +145,13 @@
             padding: 40px;
             color: #999;
         }
+
+        .description {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -152,6 +160,7 @@
     <div>
         <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
         <a href="${pageContext.request.contextPath}/admin/apprenants">Apprenants</a>
+        <a href="${pageContext.request.contextPath}/admin/professeurs">Professeurs</a>
         <a href="${pageContext.request.contextPath}/admin/formations">Formations</a>
         <a href="${pageContext.request.contextPath}/admin/inscriptions">Inscriptions</a>
         <a href="${pageContext.request.contextPath}/logout">Déconnexion</a>
@@ -189,15 +198,19 @@
             <c:forEach var="formation" items="${formations}">
                 <tr>
                     <td>${formation.id}</td>
-                    <td>${formation.titre}</td>
-                    <td>${formation.duree}</td>
-                    <td>${formation.capacite}</td>
+                    <td><strong>${formation.titre}</strong></td>
+                    <td>${formation.duree}h</td>
+                    <td>${formation.capacite} places</td>
                     <td>
                             ${formation.professeur != null ?
                                     formation.professeur.nom.concat(' ').concat(formation.professeur.prenom) :
-                                    'Non assigné'}
+                                    '⚠️ Non assigné'}
                     </td>
-                    <td>${formation.description}</td>
+                    <td>
+                        <div class="description" title="${formation.description}">
+                                ${formation.description != null ? formation.description : 'Aucune description'}
+                        </div>
+                    </td>
                     <td>
                         <div class="actions">
                             <a href="${pageContext.request.contextPath}/admin/formations?action=edit&id=${formation.id}"

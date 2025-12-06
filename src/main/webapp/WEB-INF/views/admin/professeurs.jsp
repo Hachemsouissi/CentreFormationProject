@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion Formations</title>
+    <title>Gestion Professeurs</title>
     <style>
         * {
             margin: 0;
@@ -152,6 +152,7 @@
     <div>
         <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
         <a href="${pageContext.request.contextPath}/admin/apprenants">Apprenants</a>
+        <a href="${pageContext.request.contextPath}/admin/professeurs">Professeurs</a>
         <a href="${pageContext.request.contextPath}/admin/formations">Formations</a>
         <a href="${pageContext.request.contextPath}/admin/inscriptions">Inscriptions</a>
         <a href="${pageContext.request.contextPath}/logout">Déconnexion</a>
@@ -160,9 +161,9 @@
 
 <div class="container">
     <div class="header">
-        <h2>Liste des Formations</h2>
-        <a href="${pageContext.request.contextPath}/admin/formations?action=add" class="btn-add">
-            ➕ Ajouter une formation
+        <h2>Liste des Professeurs</h2>
+        <a href="${pageContext.request.contextPath}/admin/professeurs?action=add" class="btn-add">
+            ➕ Ajouter un professeur
         </a>
     </div>
 
@@ -171,40 +172,34 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Titre</th>
-                <th>Durée (h)</th>
-                <th>Capacité</th>
-                <th>Professeur</th>
-                <th>Description</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Spécialité</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <c:if test="${empty formations}">
+            <c:if test="${empty professeurs}">
                 <tr>
-                    <td colspan="7" class="no-data">Aucune formation trouvée</td>
+                    <td colspan="6" class="no-data">Aucun professeur trouvé</td>
                 </tr>
             </c:if>
 
-            <c:forEach var="formation" items="${formations}">
+            <c:forEach var="professeur" items="${professeurs}">
                 <tr>
-                    <td>${formation.id}</td>
-                    <td>${formation.titre}</td>
-                    <td>${formation.duree}</td>
-                    <td>${formation.capacite}</td>
-                    <td>
-                            ${formation.professeur != null ?
-                                    formation.professeur.nom.concat(' ').concat(formation.professeur.prenom) :
-                                    'Non assigné'}
-                    </td>
-                    <td>${formation.description}</td>
+                    <td>${professeur.id}</td>
+                    <td>${professeur.nom}</td>
+                    <td>${professeur.prenom}</td>
+                    <td>${professeur.email}</td>
+                    <td>${professeur.specialite}</td>
                     <td>
                         <div class="actions">
-                            <a href="${pageContext.request.contextPath}/admin/formations?action=edit&id=${formation.id}"
+                            <a href="${pageContext.request.contextPath}/admin/professeurs?action=edit&id=${professeur.id}"
                                class="btn-edit">✏️ Modifier</a>
-                            <a href="${pageContext.request.contextPath}/admin/formations?action=delete&id=${formation.id}"
+                            <a href="${pageContext.request.contextPath}/admin/professeurs?action=delete&id=${professeur.id}"
                                class="btn-delete"
-                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')">
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce professeur ?')">
                                 🗑️ Supprimer
                             </a>
                         </div>
