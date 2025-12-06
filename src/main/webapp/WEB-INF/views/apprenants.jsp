@@ -147,67 +147,67 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <h1>🎓 Gestion Formation</h1>
-        <div>
-            <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
-            <a href="${pageContext.request.contextPath}/admin/apprenants">Apprenants</a>
-            <a href="${pageContext.request.contextPath}/admin/formations">Formations</a>
-            <a href="${pageContext.request.contextPath}/admin/inscriptions">Inscriptions</a>
-            <a href="${pageContext.request.contextPath}/logout">Déconnexion</a>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="header">
-            <h2>Liste des Apprenants</h2>
-            <a href="${pageContext.request.contextPath}/admin/apprenants?action=add" class="btn-add">
-                 Ajouter un apprenant
-            </a>
-        </div>
-
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Email</th>
-                        <th>Téléphone</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:if test="${empty apprenants}">
-                        <tr>
-                            <td colspan="6" class="no-data">Aucun apprenant trouvé</td>
-                        </tr>
-                    </c:if>
-
-                    <c:forEach var="apprenant" items="${apprenants}">
-                        <tr>
-                            <td>${apprenant.id}</td>
-                            <td>${apprenant.nom}</td>
-                            <td>${apprenant.prenom}</td>
-                            <td>${apprenant.email}</td>
-                            <td>${apprenant.telephone}</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="${pageContext.request.contextPath}/admin/apprenants?action=edit&id=${apprenant.id}"
-                                       class="btn-edit"> Modifier</a>
-                                    <a href="${pageContext.request.contextPath}/admin/apprenants?action=delete&id=${apprenant.id}"
-                                       class="btn-delete"
-                                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet apprenant ?')">
-                                        Supprimer
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
+<nav class="navbar">
+    <h1>🎓 Gestion Formation</h1>
+    <div>
+        <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
+        <a href="${pageContext.request.contextPath}/admin/apprenants">Apprenants</a>
+        <a href="${pageContext.request.contextPath}/admin/formations">Formations</a>
+        <a href="${pageContext.request.contextPath}/admin/inscriptions">Inscriptions</a>
+        <a href="${pageContext.request.contextPath}/logout">Déconnexion</a>
     </div>
+</nav>
+
+<div class="container">
+    <div class="header">
+        <h2>Liste des Apprenants</h2>
+        <a href="${pageContext.request.contextPath}/admin/apprenants?action=add" class="btn-add">
+            ➕ Ajouter un apprenant
+        </a>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:if test="${empty apprenants}">
+                <tr>
+                    <td colspan="6" class="no-data">Aucun apprenant trouvé</td>
+                </tr>
+            </c:if>
+
+            <c:forEach var="apprenant" items="${apprenants}">
+                <tr>
+                    <td>${apprenant.id}</td>
+                    <td>${apprenant.nom}</td>
+                    <td>${apprenant.prenom}</td>
+                    <td>${apprenant.email}</td>
+                    <td>${apprenant.telephone}</td>
+                    <td>
+                        <div class="actions">
+                            <a href="${pageContext.request.contextPath}/admin/apprenants?action=edit&id=${apprenant.id}"
+                               class="btn-edit">✏️ Modifier</a>
+                            <a href="${pageContext.request.contextPath}/admin/apprenants?action=delete&id=${apprenant.id}"
+                               class="btn-delete"
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet apprenant ?')">
+                                🗑️ Supprimer
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

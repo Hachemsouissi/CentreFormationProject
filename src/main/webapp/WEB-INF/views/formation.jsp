@@ -147,73 +147,73 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <h1> Gestion Formation</h1>
-        <div>
-            <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
-            <a href="${pageContext.request.contextPath}/admin/apprenants">Apprenants</a>
-            <a href="${pageContext.request.contextPath}/admin/formations">Formations</a>
-            <a href="${pageContext.request.contextPath}/admin/inscriptions">Inscriptions</a>
-            <a href="${pageContext.request.contextPath}/logout">Déconnexion</a>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="header">
-            <h2>Liste des Formations</h2>
-            <a href="${pageContext.request.contextPath}/admin/formations?action=add" class="btn-add">
-                 Ajouter une formation
-            </a>
-        </div>
-
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Titre</th>
-                        <th>Durée (h)</th>
-                        <th>Capacité</th>
-                        <th>Professeur</th>
-                        <th>Description</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:if test="${empty formations}">
-                        <tr>
-                            <td colspan="7" class="no-data">Aucune formation trouvée</td>
-                        </tr>
-                    </c:if>
-
-                    <c:forEach var="formation" items="${formations}">
-                        <tr>
-                            <td>${formation.id}</td>
-                            <td>${formation.titre}</td>
-                            <td>${formation.duree}</td>
-                            <td>${formation.capacite}</td>
-                            <td>
-                                ${formation.professeur != null ?
-                                  formation.professeur.nom + ' ' + formation.professeur.prenom :
-                                  'Non assigné'}
-                            </td>
-                            <td>${formation.description}</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="${pageContext.request.contextPath}/admin/formations?action=edit&id=${formation.id}"
-                                       class="btn-edit"> Modifier</a>
-                                    <a href="${pageContext.request.contextPath}/admin/formations?action=delete&id=${formation.id}"
-                                       class="btn-delete"
-                                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')">
-                                        Supprimer
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
+<nav class="navbar">
+    <h1>🎓 Gestion Formation</h1>
+    <div>
+        <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
+        <a href="${pageContext.request.contextPath}/admin/apprenants">Apprenants</a>
+        <a href="${pageContext.request.contextPath}/admin/formations">Formations</a>
+        <a href="${pageContext.request.contextPath}/admin/inscriptions">Inscriptions</a>
+        <a href="${pageContext.request.contextPath}/logout">Déconnexion</a>
     </div>
+</nav>
+
+<div class="container">
+    <div class="header">
+        <h2>Liste des Formations</h2>
+        <a href="${pageContext.request.contextPath}/admin/formations?action=add" class="btn-add">
+            ➕ Ajouter une formation
+        </a>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Durée (h)</th>
+                <th>Capacité</th>
+                <th>Professeur</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:if test="${empty formations}">
+                <tr>
+                    <td colspan="7" class="no-data">Aucune formation trouvée</td>
+                </tr>
+            </c:if>
+
+            <c:forEach var="formation" items="${formations}">
+                <tr>
+                    <td>${formation.id}</td>
+                    <td>${formation.titre}</td>
+                    <td>${formation.duree}</td>
+                    <td>${formation.capacite}</td>
+                    <td>
+                            ${formation.professeur != null ?
+                                    formation.professeur.nom.concat(' ').concat(formation.professeur.prenom) :
+                                    'Non assigné'}
+                    </td>
+                    <td>${formation.description}</td>
+                    <td>
+                        <div class="actions">
+                            <a href="${pageContext.request.contextPath}/admin/formations?action=edit&id=${formation.id}"
+                               class="btn-edit">✏️ Modifier</a>
+                            <a href="${pageContext.request.contextPath}/admin/formations?action=delete&id=${formation.id}"
+                               class="btn-delete"
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')">
+                                🗑️ Supprimer
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

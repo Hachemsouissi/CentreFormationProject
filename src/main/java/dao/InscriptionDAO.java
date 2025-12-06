@@ -58,10 +58,11 @@ public class InscriptionDAO {
         }
     }
 
+    // CORRECTION: Utiliser les objets au lieu des IDs
     public boolean exists(int idApprenant, int idFormation) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Long count = session.createQuery(
-                            "select count(i.id) from Inscription i where i.idApprenant = :idApprenant and i.idFormation = :idFormation", Long.class)
+                            "select count(i.id) from Inscription i where i.apprenant.id = :idApprenant and i.formation.id = :idFormation", Long.class)
                     .setParameter("idApprenant", idApprenant)
                     .setParameter("idFormation", idFormation)
                     .uniqueResult();
@@ -72,7 +73,7 @@ public class InscriptionDAO {
     public int countByFormation(int idFormation) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Long count = session.createQuery(
-                            "select count(i.id) from Inscription i where i.idFormation = :idFormation", Long.class)
+                            "select count(i.id) from Inscription i where i.formation.id = :idFormation", Long.class)
                     .setParameter("idFormation", idFormation)
                     .uniqueResult();
             return count != null ? count.intValue() : 0;

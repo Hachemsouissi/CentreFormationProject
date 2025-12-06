@@ -19,7 +19,6 @@ public class FormationService {
         if (f.getCapacite() <= 0)
             throw new RuntimeException("La capacité doit être > 0.");
 
-        // CORRECTION DU BUG : vérifier le professeur de la formation
         if (f.getProfesseur() != null) {
             Professeur p = professeurDAO.getById(f.getProfesseur().getId());
             if (p == null)
