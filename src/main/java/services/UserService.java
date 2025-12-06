@@ -10,7 +10,6 @@ public class UserService {
 
     private UserDAO userDAO = new UserDAO();
 
-    // Hasher le mot de passe (SHA-256)
     private String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");

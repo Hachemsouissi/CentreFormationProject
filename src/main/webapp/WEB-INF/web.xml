@@ -8,7 +8,7 @@
     <display-name>Gestion Formation</display-name>
 
     <welcome-file-list>
-        <welcome-file>lindex.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
     <session-config>
