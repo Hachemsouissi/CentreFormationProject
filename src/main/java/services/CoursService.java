@@ -60,4 +60,15 @@ public class CoursService {
     public List<Cours> listerParProfesseur(int professeurId) {
         return coursDAO.getByProfesseur(professeurId);
     }
+    public List<Cours> listerCoursVisiblesParFormation(int formationId) {
+        return coursDAO.getVisibleByFormation(formationId);
+    }
+
+    public void changerVisibilite(int coursId, boolean visible) {
+        Cours cours = coursDAO.getById(coursId);
+        if (cours != null) {
+            cours.setVisible(visible);
+            coursDAO.update(cours);
+        }
+    }
 }

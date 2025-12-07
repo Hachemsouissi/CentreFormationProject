@@ -31,10 +31,15 @@
             font-size: 24px;
         }
 
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
         .navbar a {
             color: white;
             text-decoration: none;
-            margin-left: 20px;
             padding: 8px 15px;
             border-radius: 5px;
             transition: background 0.3s;
@@ -135,9 +140,11 @@
 <body>
 <nav class="navbar">
     <h1>🎓 Espace Professeur</h1>
-    <div>
-        <a href="${pageContext.request.contextPath}/professeur/dashboard">Dashboard</a>
-        <a href="${pageContext.request.contextPath}/logout">Déconnexion</a>
+    <div class="nav-links">
+        <a href="${pageContext.request.contextPath}/professeur/dashboard">📊 Dashboard</a>
+        <a href="${pageContext.request.contextPath}/professeur/cours">📚 Mes Cours</a>
+        <a href="${pageContext.request.contextPath}/professeur/apprenants">👨‍🎓 Mes Apprenants</a>
+        <a href="${pageContext.request.contextPath}/logout">🚪 Déconnexion</a>
     </div>
 </nav>
 

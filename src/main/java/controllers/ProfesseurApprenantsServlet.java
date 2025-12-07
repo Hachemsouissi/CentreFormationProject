@@ -100,13 +100,11 @@ public class ProfesseurApprenantsServlet extends HttpServlet {
 
         int apprenantId = Integer.parseInt(request.getParameter("id"));
 
-        // Récupérer les formations du professeur
         List<Formation> mesFormations = formationService.lister().stream()
                 .filter(f -> f.getProfesseur() != null &&
                         f.getProfesseur().getId() == user.getProfesseur().getId())
                 .collect(Collectors.toList());
 
-        // Récupérer les inscriptions de cet apprenant dans les formations du professeur
         List<Inscription> inscriptionsApprenant = inscriptionService.lister().stream()
                 .filter(i -> i.getApprenant() != null &&
                         i.getApprenant().getId() == apprenantId &&

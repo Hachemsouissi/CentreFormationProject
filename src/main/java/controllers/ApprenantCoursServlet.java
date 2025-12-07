@@ -57,11 +57,12 @@ public class ApprenantCoursServlet extends HttpServlet {
                         i.getApprenant().getId() == user.getApprenant().getId())
                 .toList();
 
-        // Récupérer tous les cours des formations auxquelles l'apprenant est inscrit
         List<Cours> mesCours = new ArrayList<>();
         for (Inscription inscription : mesInscriptions) {
-            List<Cours> coursFormation = coursService.listerParFormation(
-                    inscription.getFormation().getId());
+            List<Cours> coursFormation = coursService.lister().stream()
+                    .filter(c -> c.getFormation().getId() == inscription.getFormation().getId()
+                            && c.isVisible())
+                    .toList();
             mesCours.addAll(coursFormation);
         }
 

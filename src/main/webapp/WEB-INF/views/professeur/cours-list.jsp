@@ -62,6 +62,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             padding: 25px;
             transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
         }
         .cours-card:hover {
             transform: translateY(-5px);
@@ -71,6 +72,23 @@
             color: #667eea;
             margin-bottom: 10px;
             font-size: 20px;
+        }
+        .visibility-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .visible {
+            background: #d4edda;
+            color: #155724;
+        }
+        .invisible {
+            background: #f8d7da;
+            color: #721c24;
         }
         .cours-info {
             color: #666;
@@ -106,6 +124,7 @@
         .btn-view { background: #28a745; color: white; }
         .btn-edit { background: #ffc107; color: #333; }
         .btn-delete { background: #dc3545; color: white; }
+        .btn-toggle { background: #17a2b8; color: white; }
         .no-data {
             text-align: center;
             padding: 60px 20px;
@@ -122,6 +141,7 @@
     <div>
         <a href="${pageContext.request.contextPath}/professeur/dashboard">Dashboard</a>
         <a href="${pageContext.request.contextPath}/professeur/cours">Mes Cours</a>
+        <a href="${pageContext.request.contextPath}/professeur/apprenants">Mes Apprenants</a>
         <a href="${pageContext.request.contextPath}/logout">Déconnexion</a>
     </div>
 </nav>
@@ -144,6 +164,10 @@
     <div class="cours-grid">
         <c:forEach var="cours" items="${mesCours}">
             <div class="cours-card">
+                <span class="visibility-badge ${cours.visible ? 'visible' : 'invisible'}">
+                        ${cours.visible ? '👁️ Visible' : '🔒 Caché'}
+                </span>
+
                 <h3>📖 ${cours.titre}</h3>
                 <div class="cours-info">
                     <p><strong>Formation:</strong> ${cours.formation.titre}</p>
@@ -157,6 +181,13 @@
                        class="btn btn-view">👁️ Voir</a>
                     <a href="${pageContext.request.contextPath}/professeur/cours?action=edit&id=${cours.id}"
                        class="btn btn-edit">✏️ Modifier</a>
+                    <form action="${pageContext.request.contextPath}/professeur/cours" method="post" style="display: inline;">
+                        <input type="hidden" name="action" value="toggle-visibility">
+                        <input type="hidden" name="id" value="${cours.id}">
+                        <button type="submit" class="btn btn-toggle">
+                                ${cours.visible ? '🔒 Masquer' : '👁️ Publier'}
+                        </button>
+                    </form>
                     <a href="${pageContext.request.contextPath}/professeur/cours?action=delete&id=${cours.id}"
                        class="btn btn-delete"
                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce cours ?')">

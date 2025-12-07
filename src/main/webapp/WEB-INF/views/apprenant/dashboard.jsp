@@ -31,10 +31,15 @@
             font-size: 24px;
         }
 
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
         .navbar a {
             color: white;
             text-decoration: none;
-            margin-left: 20px;
             padding: 8px 15px;
             border-radius: 5px;
             transition: background 0.3s;
@@ -145,9 +150,10 @@
 <body>
 <nav class="navbar">
     <h1>🎓 Espace Apprenant</h1>
-    <div>
-        <a href="${pageContext.request.contextPath}/apprenant/dashboard">Dashboard</a>
-        <a href="${pageContext.request.contextPath}/logout">Déconnexion</a>
+    <div class="nav-links">
+        <a href="${pageContext.request.contextPath}/apprenant/dashboard"> Dashboard</a>
+        <a href="${pageContext.request.contextPath}/apprenant/cours"> Mes Cours</a>
+        <a href="${pageContext.request.contextPath}/logout"> Déconnexion</a>
     </div>
 </nav>
 

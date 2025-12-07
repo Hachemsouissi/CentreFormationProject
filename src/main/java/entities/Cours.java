@@ -19,6 +19,9 @@ public class Cours {
     @Column(nullable = false)
     private String dateCreation;
 
+    @Column(nullable = false)
+    private boolean visible = false;
+
     @ManyToOne
     @JoinColumn(name = "formation_id", nullable = false)
     private Formation formation;
@@ -27,7 +30,7 @@ public class Cours {
     @JoinColumn(name = "professeur_id", nullable = false)
     private Professeur professeur;
 
-    private String fichierUrl; // Pour les documents joints
+    private String fichierUrl;
 
     public Cours() {}
 
@@ -37,9 +40,8 @@ public class Cours {
         this.dateCreation = dateCreation;
         this.formation = formation;
         this.professeur = professeur;
+        this.visible = false;
     }
-
-    // Getters et Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -60,4 +62,7 @@ public class Cours {
 
     public String getFichierUrl() { return fichierUrl; }
     public void setFichierUrl(String fichierUrl) { this.fichierUrl = fichierUrl; }
+
+    public boolean isVisible() { return visible; }
+    public void setVisible(boolean visible) { this.visible = visible; }
 }

@@ -77,4 +77,13 @@ public class CoursDAO {
                     .list();
         }
     }
+    public List<Cours> getVisibleByFormation(int formationId) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery(
+                            "from Cours where formation.id = :formationId and visible = true order by dateCreation desc",
+                            Cours.class)
+                    .setParameter("formationId", formationId)
+                    .list();
+        }
+    }
 }

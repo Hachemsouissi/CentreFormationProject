@@ -54,6 +54,9 @@ public class ProfesseurCoursServlet extends HttpServlet {
             case "view":
                 afficherCours(request, response);
                 break;
+            case "toggle-visibility":
+                changerVisibilite(request, response, user);
+                break;
             default:
                 listerCours(request, response, user);
         }
@@ -77,6 +80,8 @@ public class ProfesseurCoursServlet extends HttpServlet {
             ajouterCours(request, response, user);
         } else if ("edit".equals(action)) {
             modifierCours(request, response, user);
+        } else if ("toggle-visibility".equals(action)) {
+            changerVisibilite(request, response, user);
         }
     }
 
@@ -90,7 +95,6 @@ public class ProfesseurCoursServlet extends HttpServlet {
 
     private void afficherFormulaireAjout(HttpServletRequest request, HttpServletResponse response, User user)
             throws ServletException, IOException {
-        // Récupérer seulement les formations du professeur
         List<Formation> toutesFormations = formationService.lister();
         List<Formation> mesFormations = toutesFormations.stream()
                 .filter(f -> f.getProfesseur() != null &&
@@ -107,7 +111,6 @@ public class ProfesseurCoursServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Cours cours = coursService.chercher(id);
 
-        // Vérifier que le cours appartient bien au professeur
         if (cours.getProfesseur().getId() != user.getProfesseur().getId()) {
             response.sendRedirect(request.getContextPath() + "/professeur/cours");
             return;
@@ -134,13 +137,14 @@ public class ProfesseurCoursServlet extends HttpServlet {
 
             Formation formation = formationService.chercher(formationId);
 
-            // Vérifier que la formation appartient au professeur
             if (formation.getProfesseur().getId() != user.getProfesseur().getId()) {
                 throw new RuntimeException("Vous ne pouvez pas ajouter de cours à cette formation.");
             }
 
             Cours cours = new Cours(titre, contenu, LocalDate.now().toString(),
                     formation, user.getProfesseur());
+
+            cours.setVisible(false);
 
             coursService.ajouter(cours);
 
@@ -161,7 +165,6 @@ public class ProfesseurCoursServlet extends HttpServlet {
 
             Cours cours = coursService.chercher(id);
 
-            // Vérifier que le cours appartient au professeur
             if (cours.getProfesseur().getId() != user.getProfesseur().getId()) {
                 throw new RuntimeException("Vous ne pouvez pas modifier ce cours.");
             }
@@ -204,7 +207,38 @@ public class ProfesseurCoursServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Cours cours = coursService.chercher(id);
         request.setAttribute("cours", cours);
-        request.getRequestDispatcher("/WEB-INF/views/professeur/cours-view.jsp")
+        request.getRequestDispatcher("/WEB-INF/views/cours-view.jsp")
                 .forward(request, response);
+    }
+
+
+    private void changerVisibilite(HttpServletRequest request, HttpServletResponse response, User user)
+            throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Cours cours = coursService.chercher(id);
+
+            if (cours == null) {
+                throw new RuntimeException("Cours introuvable.");
+            }
+
+            if (cours.getProfesseur().getId() != user.getProfesseur().getId()) {
+                throw new RuntimeException("Vous ne pouvez pas modifier la visibilité de ce cours.");
+            }
+
+            cours.setVisible(!cours.isVisible());
+            coursService.modifier(cours);
+
+            String message = cours.isVisible() ?
+                    "Cours publié avec succès ! Les apprenants peuvent maintenant le voir." :
+                    "Cours masqué avec succès. Les apprenants ne peuvent plus le voir.";
+
+            request.getSession().setAttribute("successMessage", message);
+
+            response.sendRedirect(request.getContextPath() + "/professeur/cours");
+        } catch (Exception e) {
+            request.getSession().setAttribute("errorMessage", e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/professeur/cours");
+        }
     }
 }
