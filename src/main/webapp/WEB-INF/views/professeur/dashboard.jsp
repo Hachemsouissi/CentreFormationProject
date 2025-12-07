@@ -141,10 +141,10 @@
 <nav class="navbar">
     <h1>🎓 Espace Professeur</h1>
     <div class="nav-links">
-        <a href="${pageContext.request.contextPath}/professeur/dashboard">📊 Dashboard</a>
-        <a href="${pageContext.request.contextPath}/professeur/cours">📚 Mes Cours</a>
-        <a href="${pageContext.request.contextPath}/professeur/apprenants">👨‍🎓 Mes Apprenants</a>
-        <a href="${pageContext.request.contextPath}/logout">🚪 Déconnexion</a>
+        <a href="${pageContext.request.contextPath}/professeur/dashboard"> Dashboard</a>
+        <a href="${pageContext.request.contextPath}/professeur/cours"> Mes Cours</a>
+        <a href="${pageContext.request.contextPath}/professeur/apprenants"> Mes Apprenants</a>
+        <a href="${pageContext.request.contextPath}/logout"> Déconnexion</a>
     </div>
 </nav>
 

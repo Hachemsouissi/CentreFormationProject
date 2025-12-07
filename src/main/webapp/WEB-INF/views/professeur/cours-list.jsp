@@ -148,9 +148,9 @@
 
 <div class="container">
     <div class="header">
-        <h2>📚 Mes Cours</h2>
+        <h2> Mes Cours</h2>
         <a href="${pageContext.request.contextPath}/professeur/cours?action=add" class="btn-add">
-            ➕ Ajouter un cours
+             Ajouter un cours
         </a>
     </div>
 
@@ -178,20 +178,20 @@
                 </div>
                 <div class="actions">
                     <a href="${pageContext.request.contextPath}/professeur/cours?action=view&id=${cours.id}"
-                       class="btn btn-view">👁️ Voir</a>
+                       class="btn btn-view"> Voir</a>
                     <a href="${pageContext.request.contextPath}/professeur/cours?action=edit&id=${cours.id}"
-                       class="btn btn-edit">✏️ Modifier</a>
+                       class="btn btn-edit"> Modifier</a>
                     <form action="${pageContext.request.contextPath}/professeur/cours" method="post" style="display: inline;">
                         <input type="hidden" name="action" value="toggle-visibility">
                         <input type="hidden" name="id" value="${cours.id}">
                         <button type="submit" class="btn btn-toggle">
-                                ${cours.visible ? '🔒 Masquer' : '👁️ Publier'}
+                                ${cours.visible ? ' Masquer' : ' Publier'}
                         </button>
                     </form>
                     <a href="${pageContext.request.contextPath}/professeur/cours?action=delete&id=${cours.id}"
                        class="btn btn-delete"
                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce cours ?')">
-                        🗑️ Supprimer
+                         Supprimer
                     </a>
                 </div>
             </div>
