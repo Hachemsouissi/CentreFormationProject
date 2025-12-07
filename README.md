@@ -1,5 +1,4 @@
-Vue d'ensembleCentre:
-de Formation est une application web Java EE permettant la gestion complète d'un centre de formation. 
+Notre app est une application web Java EE permettant la gestion complète d'un centre de formation. 
 Elle offre trois espaces distincts : administrateur, professeur et apprenant, chacun avec des fonctionnalités adaptées à son rôle.Architecture de l'applicationTechnologies utiliséesBackend :
 
 Java 17
