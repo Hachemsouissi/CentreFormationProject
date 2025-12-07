@@ -16,22 +16,6 @@ JavaScript (Gestion dynamique des formulaires)
 Serveur d'application :
 
 Apache Tomcat 10.1.49
-Structure du projetCentreFormationProject/
-├── src/main/java/
-│   ├── controllers/       # Servlets de contrôle
-│   ├── dao/              # Data Access Objects
-│   ├── entities/         # Entités JPA
-│   ├── services/         # Logique métier
-│   ├── filters/          # Filtres de sécurité
-│   └── utils/            # Utilitaires (HibernateUtil)
-├── src/main/resources/
-│   └── hibernate.cfg.xml # Configuration Hibernate
-├── src/main/webapp/
-│   └── WEB-INF/
-│       ├── views/        # Pages JSP
-│       ├── error/        # Pages d'erreur
-│       └── web.xml       # Configuration web
-└── pom.xml               # Configuration MavenModèle de donnéesEntités principalesUser
 
 Gestion de l'authentification
 Liaison avec Apprenant ou Professeur selon le rôle
